@@ -1,17 +1,28 @@
 /* CSS for student login page */
 
 body {
-  padding: 40px;
-  line-height: 1.6;
-}
-  
-
-
-
-h2 {
-  color: blue;
-  font-size:40px;
-  font-famly:Arial, Gadget, sans-serif;
+   padding: 40px;
+   line-height: 1.6;
+   background-color: black;
 }
 
+   h1 {
+      color: blue;
+      font-size: 40px;
+      font-family: Arial, Gadget, sans-serif;
+   }
 
+   h2 {
+color:#1E407C;
+margin-top: 30px;
+   }
+
+       p {
+          color: white;
+       }
+   
+   ul {
+      color: white;
+        }
+       
+       
