@@ -3,26 +3,39 @@
 body {
    padding: 40px;
    line-height: 1.6;
-   background-color: black;
+   min-height: 100vh;
+   background: linear-gradient(to bottom, #16213E, #0F172A, #000000);
+   font-family: Arial, sans-serif;
 }
 
    h1 {
-      color: blue;
+      color: #6EA8FE;
       font-size: 40px;
       font-family: Arial, Gadget, sans-serif;
    }
 
    h2 {
-color:#1E407C;
-margin-top: 30px;
+      color:#1E407C;
+      margin-top: 30px;
    }
 
-       p {
-          color: white;
-       }
+   p {
+      color: white;
+   }
    
    ul {
       color: white;
-        }
+   }
        
-       
+   label {
+      color: white;
+   }
+   
+   input {
+      padding: 5px;
+      margin: 3px;
+   }
+   
+   button {
+      background-color: #6EA8FE;
+   }
