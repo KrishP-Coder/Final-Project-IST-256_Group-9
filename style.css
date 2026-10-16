@@ -48,6 +48,10 @@ background: linear-gradient(to bottom, #003B73, #001F3F, #000814);
 font-family: 
 }
 
- .event-item {
-   color:white;
+.event-item {
+color:white;
 } 
+
+.product-page .return-homepage {
+color:white;
+}
