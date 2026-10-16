@@ -41,3 +41,12 @@ body {
    }
 
 /* CSS for product page */
+
+.product-page body { 
+padding: 40px;
+background: linear-gradient(to bottom, #003B73, #001F3F, #000814);
+}
+
+ .event-item {
+   color:white;
+} 
