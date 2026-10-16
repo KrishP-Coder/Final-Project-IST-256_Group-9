@@ -42,7 +42,7 @@ body {
 
 /* CSS for product page */
 
-.product-page body { 
+body.product-page  { 
 padding: 40px;
 background: linear-gradient(to bottom, #003B73, #001F3F, #000814);
 }
