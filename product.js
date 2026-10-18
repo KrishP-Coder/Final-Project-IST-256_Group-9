@@ -53,7 +53,7 @@ eventForm.addEventListener("submit", function(event) {
     eventItem.replaceChildren();
 
     // create a new div to hold the event details
-    const eventTitle = document.createElement("strong");
+    const eventTitle = document.createElement("h6");
     eventTitle.textContent = name;
     eventItem.appendChild(eventTitle);
 
