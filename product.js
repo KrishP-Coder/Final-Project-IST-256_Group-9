@@ -50,7 +50,39 @@ eventForm.addEventListener("submit", function(event) {
     eventItem.dataset.cost = cost;
     eventItem.dataset.info = info;
 
-    
+    eventItem.replaceChildren();
+
+    // create a new div to hold the event details
+    const eventTitle = document.createElement("strong");
+    eventTitle.textContent = name;
+    eventItem.appendChild(eventTitle);
+
+    const eventDetails = document.createElement("div");
+    eventDetails.classList.add("event-details");
+    eventDetails.innerHTML = `
+        Category: ${category}<br>
+        Format: ${format}<br>
+        Cost: $${cost}<br>
+        Info: ${info}
+    `;
+    eventItem.appendChild(eventDetails);
+
+    // append info if user inputted anything
+    if (info !== "") {
+        const eventInfo = document.createElement("div");
+        eventInfo.classList.add("event-info");
+        eventInfo.textContent = "Additional Info: " + info;
+        eventItem.appendChild(eventInfo);
+    }
+
+    // apply search filter to the newly created or updated event
+    filterEvents();
+
+    // reset the form after submission
+    eventForm.reset();
+
+    // display message to the user
+    alert(existingEvent ? "Event updated successfully!" : "Event created successfully!");
 
 });
 
