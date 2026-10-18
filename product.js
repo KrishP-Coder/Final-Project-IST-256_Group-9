@@ -63,7 +63,6 @@ eventForm.addEventListener("submit", function(event) {
         Category: ${category}<br>
         Format: ${format}<br>
         Cost: $${cost}<br>
-        Info: ${info}
     `;
     eventItem.appendChild(eventDetails);
 
@@ -71,7 +70,7 @@ eventForm.addEventListener("submit", function(event) {
     if (info !== "") {
         const eventInfo = document.createElement("div");
         eventInfo.classList.add("event-info");
-        eventInfo.textContent = "Additional Info: " + info;
+        eventInfo.textContent = "Info: " + info;
         eventItem.appendChild(eventInfo);
     }
 
