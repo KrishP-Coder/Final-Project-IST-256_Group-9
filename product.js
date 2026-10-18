@@ -32,9 +32,10 @@ eventForm.addEventListener("submit", function(event) {
 
     
     // check if user creating a new event or updating an existing one
-    let eventItem = document.getElementById(id);
+    let existingEvent = document.getElementById(id);
+    let eventItem = existingEvent;
 
-    if  (!eventItem) {
+    if (!eventItem) {
         // create a new event item if ID is not already in use
         eventItem = document.createElement("li");
         eventItem.id = id;
@@ -48,6 +49,8 @@ eventForm.addEventListener("submit", function(event) {
     eventItem.dataset.format = format;
     eventItem.dataset.cost = cost;
     eventItem.dataset.info = info;
+
+    
 
 });
 
