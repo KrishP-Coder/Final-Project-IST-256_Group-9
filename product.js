@@ -26,3 +26,23 @@ eventForm.addEventListener("submit", function(event) {
     let info = additionalInfo.value;
 
 });
+
+// Search events
+function filterEvents() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let events = document.getElementsByClassName("event-item");
+
+    for (let i = 0; i<events.length; i++) {
+    let eventText = events[i].innerText.toLowerCase();
+
+    if (eventText.includes(input)) {
+        events[i].classList.remove("hidden");
+    }
+    else {
+      events[i].classList.add("hidden");
+    }
+  }    
+}
+
+
+searchBar.addEventListener("input", filterEvents);

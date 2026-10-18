@@ -93,21 +93,7 @@
       <!-- the class AI tool helped me develope this search function --> 
       <script>
         
-        function filterEvents() {
-          let input = document.getElementById("searchBar").value.toLowerCase();
-          let events = document.getElementsByClassName("event-item");
 
-          for (let i = 0; i<events.length; i++) {
-            let eventText = events[i].innerText.toLowerCase();
-
-            if (eventText.includes(input)) {
-              events[i].classList.remove("hidden");
-            }
-            else {
-              events[i].classList.add("hidden");
-            }
-          }    
-        }
       </script>
       
       <span class = "return-homepage"> Return to Homepage:</span>
