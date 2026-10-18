@@ -25,6 +25,30 @@ eventForm.addEventListener("submit", function(event) {
     let cost = eventCost.value;
     let info = additionalInfo.value;
 
+    // make sure event ID begins with 'event-'
+    if (!id.startsWith("event-")) {
+        id = "event-" + id;
+    }
+
+    
+    // check if user creating a new event or updating an existing one
+    let eventItem = document.getElementById(id);
+
+    if  (!eventItem) {
+        // create a new event item if ID is not already in use
+        eventItem = document.createElement("li");
+        eventItem.id = id;
+        eventItem.classList.add("event-item");
+        eventList.appendChild(eventItem);
+    }
+
+    // update the event item with the new values
+    eventItem.dataset.name = name;
+    eventItem.dataset.category = category;
+    eventItem.dataset.format = format;
+    eventItem.dataset.cost = cost;
+    eventItem.dataset.info = info;
+
 });
 
 // Search events
