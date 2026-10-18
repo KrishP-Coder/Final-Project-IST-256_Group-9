@@ -14,93 +14,97 @@ const additionalInfo = document.getElementById("info");
 const searchBar = document.getElementById("searchBar");
 
 // Create or update an event
-eventForm.addEventListener("submit", function(event) {
-    event.preventDefault();
+eventForm.addEventListener("submit", function (event) {
+   event.preventDefault();
 
-    //get values from the input fields
-    let id = eventId.value;
-    let name = eventName.value;
-    let category = eventCategory.value;
-    let format = eventFormat.value;
-    let cost = eventCost.value;
-    let info = additionalInfo.value;
+   //get values from the input fields
+   let id = eventId.value;
+   let name = eventName.value;
+   let category = eventCategory.value;
+   let format = eventFormat.value;
+   let cost = eventCost.value;
+   let info = additionalInfo.value;
 
-    // make sure event ID begins with 'event-'
-    if (!id.startsWith("event-")) {
-        id = "event-" + id;
-    }
+   // make sure event ID begins with 'event-'
+   if (!id.startsWith("event-")) {
+      id = "event-" + id;
+   }
 
-    
-    // check if user creating a new event or updating an existing one
-    let existingEvent = document.getElementById(id);
-    let eventItem = existingEvent;
 
-    if (!eventItem) {
-        // create a new event item if ID is not already in use
-        eventItem = document.createElement("li");
-        eventItem.id = id;
-        eventItem.classList.add("event-item");
-        eventList.appendChild(eventItem);
-    }
+   // check if user creating a new event or updating an existing one
+   let existingEvent = document.getElementById(id);
+   let eventItem = existingEvent;
 
-    // update the event item with the new values
-    eventItem.dataset.name = name;
-    eventItem.dataset.category = category;
-    eventItem.dataset.format = format;
-    eventItem.dataset.cost = cost;
-    eventItem.dataset.info = info;
+   if (!eventItem) {
+      // create a new event item if ID is not already in use
+      eventItem = document.createElement("li");
+      eventItem.id = id;
+      eventItem.classList.add("event-item");
+      eventList.appendChild(eventItem);
+   }
 
-    eventItem.replaceChildren();
+   // update the event item with the new values
+   eventItem.dataset.name = name;
+   eventItem.dataset.category = category;
+   eventItem.dataset.format = format;
+   eventItem.dataset.cost = cost;
+   eventItem.dataset.info = info;
 
-    // create a new div to hold the event details
-    const eventTitle = document.createElement("h6");
-    eventTitle.textContent = name;
-    eventItem.appendChild(eventTitle);
+   eventItem.replaceChildren();
 
-    const eventDetails = document.createElement("div");
-    eventDetails.classList.add("event-details");
-    eventDetails.innerHTML = `
+   // create a new div to hold the event details
+   const eventTitle = document.createElement("h6");
+   eventTitle.textContent = name;
+   eventItem.appendChild(eventTitle);
+
+   const eventDetails = document.createElement("div");
+   eventDetails.classList.add("event-details");
+   eventDetails.innerHTML = `
         Category: ${category}<br>
         Format: ${format}<br>
         Cost: $${cost}<br>
     `;
-    eventItem.appendChild(eventDetails);
+   eventItem.appendChild(eventDetails);
 
-    // append info if user inputted anything
-    if (info !== "") {
-        const eventInfo = document.createElement("div");
-        eventInfo.classList.add("event-info");
-        eventInfo.textContent = "Info: " + info;
-        eventItem.appendChild(eventInfo);
-    }
+   // append info if user inputted anything
+   if (info !== "") {
+      const eventInfo = document.createElement("div");
+      eventInfo.classList.add("event-info");
+      eventInfo.textContent = "Info: " + info;
+      eventItem.appendChild(eventInfo);
+   }
 
-    // apply search filter to the newly created or updated event
-    filterEvents();
+   // apply search filter to the newly created or updated event
+   filterEvents();
 
-    // reset the form after submission
-    eventForm.reset();
+   // reset the form after submission
+   eventForm.reset();
 
-    // display message to the user
-    alert(existingEvent ? "Event updated successfully!" : "Event created successfully!");
+   // display message to the user
+   alert(existingEvent ? "Event updated successfully!" : "Event created successfully!");
 
 });
 
 // Search events
 function filterEvents() {
-    let input = document.getElementById("searchBar").value.toLowerCase();
-    let events = document.getElementsByClassName("event-item");
+   let input = document.getElementById("searchBar").value.toLowerCase();
+   let events = document.getElementsByClassName("event-item");
 
-    for (let i = 0; i<events.length; i++) {
-    let eventText = events[i].innerText.toLowerCase();
+   for (let i = 0; i < events.length; i++) {
+      let eventText = events[i].innerText.toLowerCase();
 
-    if (eventText.includes(input)) {
-        events[i].classList.remove("hidden");
-    }
-    else {
-      events[i].classList.add("hidden");
-    }
-  }    
+      if (eventText.includes(input)) {
+         events[i].classList.remove("hidden");
+      }
+      else {
+         events[i].classList.add("hidden");
+      }
+   }
 }
 
+const searchForm = document.getElementById("searchForm");
 
-searchBar.addEventListener("input", filterEvents);
+searchForm.addEventListener("submit", function(event) {
+   event.preventDefault();
+   filterEvents();
+});
