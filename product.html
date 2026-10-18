@@ -14,6 +14,11 @@
       list-style-type: none;}
     #event-7 {
       border: 2px solid red;}
+
+    .hidden {
+      display: none;
+    }
+    
   </style>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +26,6 @@
 </head>
 
   <body class = "product-page">
-    <p>
       <h1>ClubU Event Management</h1>
       <ul id="event-list">
         <li id="event-1" class="event-item">Meet the Team!</li>
@@ -34,8 +38,78 @@
         <li id="event-8" class="event-item">Networking Event 3 (In DC)</li>
         <li id="event-9" class="event-item">Coding Night 3</li>
       </ul>
+
+      <h2>Add or Update an Event</h2>
+      <form id="eventForm">
+        <div class="mb-3">
+          <label for="itemId" class="form-label">Event ID:</label>
+          <input type="text" id="itemId" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Event Name:</label>
+          <input type="text" id="description" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="category" class="form-label">Event Category:</label>
+          <select id="category" class="form-select" required>
+            <option value="">Choose a category</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Competition">Competition</option>
+            <option value="Networking">Networking</option>
+            <option value="Seminar">Seminar</option>
+            <option value="Trip">Trip</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="unit" class="form-label">Event Format:</label>
+          <select id="unit" class="form-select" required>
+            <option value="">Choose a format</option>
+            <option value="Hours">Hours</option>
+            <option value="Sessions">Sessions</option>
+            <option value="Days">Days</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="price" class="form-label">Event Cost ($):</label>
+          <input type="number" id="price" class="form-control" min="0" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="info" class="form-label">Additional Information (Optional):</label>
+          <input type="text" id="info" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Event</button>
+      </form>
+     
+      <h2>Search Event</h2>
+      <input type="text" id="searchBar" placeholder="Search for an event..." 
+        onkeyup="filterEvents()">
+    
+      <!-- the class AI tool helped me develope this search function --> 
+      <script>
+        
+        function filterEvents() {
+          let input = document.getElementById("searchBar").value.toLowerCase();
+          let events = document.getElementsByClassName("event-item");
+
+          for (let i = 0; i<events.length; i++) {
+            let eventText = events[i].innerText.toLowerCase();
+
+            if (eventText.includes(input)) {
+              events[i].classList.remove("hidden");
+            }
+            else {
+              events[i].classList.add("hidden");
+            }
+          }    
+        }
+      </script>
       
       <span class = "return-homepage"> Return to Homepage:</span>
       <a href="index.html"><button type="submit">Home</button></a>
-    </p>
   </body>
