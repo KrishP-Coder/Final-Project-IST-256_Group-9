@@ -1,16 +1,17 @@
+
 // JavaScript for student login page
 
-
-//validate user inputs --can be altered
+// Validate user inputs
 function validateUserInput(username, password) {
-  if (!username || !password) {
-    alert("Please enter both username and password.");
-    return false;
-  }
-  return true;
+    if (!username || !password) {
+        alert("Please enter both username and password.");
+        return false;
+    }
+
+    return true;
 }
 
-// store users into user.json
+// Store users into users.json
 
 const form = document.getElementById("signupForm");
 const table = document.getElementById("memberTable");
@@ -61,9 +62,10 @@ form.addEventListener("submit", function(event) {
     displayUsers();
 });
 
-
+// Display users in the table
 function displayUsers() {
     table.innerHTML = "";
+
     users.forEach(function(user, index) {
         const row = document.createElement("tr");
 
@@ -74,31 +76,31 @@ function displayUsers() {
             "<td>" + user.address + "</td>" +
             "<td>" + user.phone + "</td>" +
             "<td><button onclick='updateUser(" + index + ")'>Update</button></td>";
+
         table.appendChild(row);
     });
 }
 
-
+// Update user
 function updateUser(index) {
     document.getElementById("name").value = users[index].name;
     document.getElementById("age").value = users[index].age;
     document.getElementById("email").value = users[index].email;
     document.getElementById("address").value = users[index].address;
     document.getElementById("phone").value = users[index].phone;
+
     updateIndex = index;
 }
 
-
+// Download JSON
 downloadButton.addEventListener("click", function() {
     const json = JSON.stringify(users, null, 2);
-    const file = new Blob([json], { type: "application/json" });
-    
+    const file = new Blob([json], {type: "application/json"});
+
     const link = document.createElement("a");
+
     link.href = URL.createObjectURL(file);
     link.download = "users.json";
 
     link.click();
 });
-
-
-
