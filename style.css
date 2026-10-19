@@ -1,65 +1,66 @@
+
 /* CSS for student login page */
 
 body {
-   padding: 40px;
-   line-height: 1.6;
-   min-height: 100vh;
-   background: linear-gradient(to bottom, #16213E, #0F172A, #000000);
-   font-family: Arial, sans-serif;
+    padding: 40px;
+    line-height: 1.6;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #16213E, #0F172A, #000000);
+    font-family: Arial, sans-serif;
 }
 
-   h1 {
-      color: #6EA8FE;
-      font-size: 40px;
-      font-family: Arial, Gadget, sans-serif;
-   }
+h1 {
+    color: #6EA8FE;
+    font-size: 40px;
+    font-family: Arial, Gadget, sans-serif;
+}
 
-   h2 {
-      color:#1E407C;
-      margin-top: 30px;
-   }
+h2 {
+    color: #1E407C;
+    margin-top: 30px;
+}
 
-   p {
-      color: white;
-   }
-   
-   ul {
-      color: white;
-   }
-       
-   label {
-      color: white;
-   }
-   
-   input {
-      padding: 5px;
-      margin: 3px;
-   }
-   
-   button {
-      background-color: #6EA8FE;
-   }
+p {
+    color: white;
+}
+
+ul {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+input {
+    padding: 5px;
+    margin: 3px;
+}
+
+button {
+    background-color: #6EA8FE;
+}
 
 /* CSS for product page */
 
-body.product-page  { 
-padding: 40px;
-background: linear-gradient(to bottom, #003B73, #001F3F, #000814);
-font-family: 
+body.product-page {
+    padding: 40px;
+    background: linear-gradient(to bottom, #003B73, #001F3F, #000814);
+    font-family: Arial, sans-serif;
 }
 
 .event-item {
-color: white;
-} 
+    color: white;
+}
 
 .product-page .return-homepage {
-color: white;
+    color: white;
 }
 
 .product-page h1 {
-color: #7DD3FC;
+    color: #7DD3FC;
 }
 
 .product-page h2 {
-color: white
+    color: white;
 }
