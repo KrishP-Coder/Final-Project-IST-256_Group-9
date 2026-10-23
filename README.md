@@ -14,9 +14,13 @@ Student club website for the Web Dev Club.
 
 - index.html - Main homepage
 - signup.html - Member sign-up page
+- product.html - Club Event Info page
+- shoppingCart.html - Events signupsheet
 - style.css - Website styling
-- script.js - JavaScript + form validation
+- script.js - signupsheet JavaScript + form validation
+- product.js - Event Info JavaScript + form validation
 - users.json - User + member data
+- events.json - event data
 
 # Group Members
 
