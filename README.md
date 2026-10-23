@@ -7,8 +7,11 @@ Student club website for the Web Dev Club.
 - Homepage with information about the club
 - Navigation between pages
 - Member sign-up page
+- Event Information Page
+- Event Signup Page
 - Form validation using JavaScript
 - User information stored in JSON format
+- Event Information stored in JSON format
 
 # Files
 
