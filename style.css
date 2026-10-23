@@ -66,3 +66,6 @@ body.product-page {
 }
 
 /* CSS for shopping cart page */
+th {
+    color: white;
+}

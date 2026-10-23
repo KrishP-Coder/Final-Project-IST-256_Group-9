@@ -14,6 +14,10 @@
 
     <h1>Shopping Cart</h1>
 
+    <h2>Search Events</h2>
+    <input type="text" id="searchBar" class="form-control mb-3" placeholder="Search events...">
+
+
     <div id="cartContainer">
         <table id="cartTable" border="1">
             <thead>
@@ -25,13 +29,41 @@
             </thead>
             <tbody id="cartItems"></tbody>
         </table>
+    </div>
 
+    <div>
+    <h2>Add or Remove an Event</h2>
+
+    <form id="eventForm" novalidate>
+
+        <div class="mb-3">
+            <label for="itemId">Event ID:</label>
+            <input type="text" id="itemId" class="form-control" placeholder="Example: event-10" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="addOrRemove">Add or Remove:</label>
+            <select id="addOrRemove" class="form-select" required>
+                <option value="">Choose an action</option>
+                <option value="Add">Add Event</option>
+                <option value="Remove">Remove Event</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    </div>
+
+    <div>
         <h2>Total: $<span id="totalAmount">0.00</span></h2>
 
         <button id="checkoutButton">Checkout</button>
     </div>
-
-    <script src="cart.js"></script>
+    
+    <a href="index.html"><button type="button">Home</button></a>
+    <a href="product.html"><button type="button">Events</button></a>
+    <!--<script src="cart.js"></script> -->
 
 </body>
 </html>
