@@ -66,6 +66,11 @@ body.product-page {
 }
 
 /* CSS for shopping cart page */
-th {
-    color: white;
+body.shopping-cart{
+   background: linear-gradient(to bottom, #312E81, #1E1B4B, #09090F);
+}
+
+body.shopping-cart th {
+   color: white;
+   padding: 30px;
 }
