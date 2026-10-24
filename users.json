@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "name": "Will",
+    "age": "20",
+    "email": "wlt5072@psu.edu",
+    "address": "507 John street",
+    "phone": "570-479-5404"
+  },
+  {
+    "name": "Krish",
+    "age": "20",
+    "email": "krishpatel@goodemail.com",
+    "address": "209 Shortlidge Ave",
+    "phone": "362-372-3827"
+  },
+  {
+    "name": "Cool Member",
+    "age": "100",
+    "email": "Member@Uclub.com",
+    "address": "409 Club Steet",
+    "phone": "209-492-3842"
+  }
+]

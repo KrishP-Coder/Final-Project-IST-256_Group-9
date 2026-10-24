@@ -15,13 +15,25 @@ if (events === null) {
         .then(data => {
             events = data;
             localStorage.setItem("events", JSON.stringify(events));
-            displayEvents();
+            setupEvents();
         })
         .catch(() => {
             events = [];
-            showMessage("Could not load events.json.", true);
+            showMessage("Couldn't load events.json.", true);
         });
 } else {
+    setupEvents();
+}
+
+
+function setupEvents() {
+    events.forEach(function(item) {
+        if (!Number.isInteger(item.seats) || item.seats < 0) {
+            item.seats = 20;
+        }
+        item.unit = "Seats";
+    });
+    localStorage.setItem("events", JSON.stringify(events));
     displayEvents();
 }
 
@@ -36,12 +48,18 @@ form.addEventListener("submit", function(event) {
     let id = document.getElementById("itemId").value.trim();
     const description = document.getElementById("description").value.trim();
     const category = document.getElementById("category").value;
-    const unit = document.getElementById("unit").value;
+    const seatsInput = document.getElementById("seats").value;
+    const seats = Number(seatsInput);
     const cost = document.getElementById("price").value;
     const info = document.getElementById("info").value.trim();
 
-    if (id === "" || description === "" || category === "" || unit === "" || cost === "") {
+    if (id === "" || description === "" || category === "" || seatsInput === "" || cost === "") {
         showMessage("Please fill out all required fields.", true);
+        return;
+    }
+
+    if (!Number.isInteger(seats) || seats < 0) {
+        showMessage("Please enter a valid number of available seats.", true);
         return;
     }
 
@@ -58,7 +76,8 @@ form.addEventListener("submit", function(event) {
         id: id,
         description: description,
         category: category,
-        unit: unit,
+        unit: "Seats",
+        seats: seats,
         price: Number(cost),
         info: info
     };
@@ -93,7 +112,7 @@ function displayEvents() {
             item.id,
             item.description,
             item.category,
-            item.unit,
+            item.seats,
             "$" + Number(item.price).toFixed(2),
             item.info
         ];
@@ -118,7 +137,7 @@ function updateEvent(index) {
     document.getElementById("itemId").value = item.id;
     document.getElementById("description").value = item.description;
     document.getElementById("category").value = item.category;
-    document.getElementById("unit").value = item.unit;
+    document.getElementById("seats").value = item.seats;
     document.getElementById("price").value = item.price;
     document.getElementById("info").value = item.info;
 

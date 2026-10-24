@@ -1,74 +1,83 @@
 [
-  {
-    "id": "event-1",
-    "description": "Meet the Team!",
-    "category": "Networking",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-2",
-    "description": "Coding Night 1",
-    "category": "Workshop",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-3",
-    "description": "Networking Event 1",
-    "category": "Networking",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-4",
-    "description": "Coding Night 2",
-    "category": "Workshop",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-5",
-    "description": "Cyber Defense Seminar 1",
-    "category": "Seminar",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-6",
-    "description": "Networking Event 2",
-    "category": "Networking",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-7",
-    "description": "Winter Trip to DC",
-    "category": "Trip",
-    "unit": "Days",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-8",
-    "description": "Networking Event 3 (In DC)",
-    "category": "Networking",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  },
-  {
-    "id": "event-9",
-    "description": "Coding Night 3",
-    "category": "Workshop",
-    "unit": "Sessions",
-    "price": 0,
-    "info": ""
-  }
+    {
+        "id": "event-1",
+        "description": "Meet the Team!",
+        "category": "Networking",
+        "unit": "Seats",
+        "price": 5,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-2",
+        "description": "Coding Night 1",
+        "category": "Workshop",
+        "unit": "Seats",
+        "price": 10,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-3",
+        "description": "Networking Event 1",
+        "category": "Networking",
+        "unit": "Seats",
+        "price": 10,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-4",
+        "description": "Coding Night 2",
+        "category": "Workshop",
+        "unit": "Seats",
+        "price": 5,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-5",
+        "description": "Cyber Defense Seminar 1",
+        "category": "Seminar",
+        "unit": "Seats",
+        "price": 0,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-6",
+        "description": "Networking Event 2",
+        "category": "Networking",
+        "unit": "Seats",
+        "price": 5,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-7",
+        "description": "Winter Trip to DC",
+        "category": "Trip",
+        "unit": "Seats",
+        "price": 50,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-8",
+        "description": "Networking Event 3 (In DC)",
+        "category": "Networking",
+        "unit": "Seats",
+        "price": 50,
+        "info": "",
+        "seats": 20
+    },
+    {
+        "id": "event-9",
+        "description": "Coding Night 3",
+        "category": "Workshop",
+        "unit": "Seats",
+        "price": 5,
+        "info": "",
+        "seats": 20
+    }
 ]
