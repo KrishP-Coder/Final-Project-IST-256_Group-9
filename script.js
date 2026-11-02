@@ -104,3 +104,28 @@ downloadButton.addEventListener("click", function() {
 
     link.click();
 });
+
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const userData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Success:", data);
+        alert("Registration submitted!");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
