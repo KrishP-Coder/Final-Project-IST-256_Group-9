@@ -69,13 +69,22 @@ function displayUsers() {
     users.forEach(function(user, index) {
         const row = document.createElement("tr");
 
-        row.innerHTML =
-            "<td>" + user.name + "</td>" +
-            "<td>" + user.age + "</td>" +
-            "<td>" + user.email + "</td>" +
-            "<td>" + user.address + "</td>" +
-            "<td>" + user.phone + "</td>" +
-            "<td><button onclick='updateUser(" + index + ")'>Update</button></td>";
+        const values = [user.name, user.age, user.email, user.address, user.phone];
+
+        values.forEach(function(value) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        const updateCell = document.createElement("td");
+        const updateButton = document.createElement("button");
+        updateButton.textContent = "Update";
+        updateButton.addEventListener("click", function() {
+            updateUser(index);
+        });
+        updateCell.appendChild(updateButton);
+        row.appendChild(updateCell);
 
         table.appendChild(row);
     });
