@@ -88,4 +88,16 @@ body.shopping-cart .table button {
     background-color: #6EA8FE;
 }
 
-/* CSS for options page */
+/* CSS for Finalization page */
+
+body.finalization {
+    background: linear-gradient(to bottom, #101d3a, #172c55, #080d1b);
+    color: white;
+}
+
+body.finalization h2 {
+    color: white;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
