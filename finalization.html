@@ -14,62 +14,30 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="finalization.js"></script>
-
 </head>
 
 <body class="finalization">
 
-    <h1>ClubU Reservation Finalization</h1>
-    <p>Review your reservations and select your attendance and payment options.</p>
-    <h2>Your Reservations</h2>
+    <div class="container">
+        <h1>ClubU Reservation Finalization</h1>
+        <p>Review your reservations and select your attendance and payment options.</p>
+    
 
-    <div class="table-responsive">
-        <table class="table table-dark table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Seats</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
+        <!-- React root for finalization form -->
+        <div id="finalizationRoot"></div>
 
-            <tbody id="reservationTable"></tbody>
-        </table>
+        <div class="mt-4">
+        <p>
+            Return to another page:
+            <a href="index.html" class="btn btn-primary">Home</a>
+            <a href="shoppingCart.html" class="btn btn-primary">Shopping Cart</a>
+        </p>
+
+        </div>
     </div>
-    <p>Total: $<span id="totalAmount">0.00</span></p>
 
-    <h2>Finalization Options</h2>
-
-    <form id="finalizationForm">
-        <div class="mb-3">
-            <label for="attendanceType">Attendance Type:</label>
-            <select id="attendanceType" class="form-select" required>
-                <option value="">Choose attendance type</option>
-                <option value="Virtual">Virtual</option>
-                <option value="In Person">In Person</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="paymentType">Payment Type:</label>
-            
-            <select id="paymentType" class="form-select" required>
-                <option value="">Choose payment type</option>
-                <option value="Cash">Cash</option>
-                <option value="Card">Card</option>
-            </select>
-        </div>
-
-        <button type="submit">Confirm Reservation</button>
-    </form>
-
-    <br><br>
-    <p>
-        Return to homepage:
-        <a href="index.html"><button type="button">Home</button></a>
-        <a href="shoppingCart.html"><button type="button">Shopping Cart</button></a>
-    </p>
+    <!-- Load React application -->
+    <script type="text/babel" src="finalization.js"></script>
 
 </body>
 </html>

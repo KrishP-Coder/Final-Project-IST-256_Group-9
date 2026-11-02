@@ -220,8 +220,8 @@ form.addEventListener("submit", function(event) {
             showMessage("Reservation confirmed!");
         },
         error: function() {
-            // Saved locally since API aint done
-            showMessage("Reservation confirmed! Saved in browser; no api.");
+            // Saved locally
+            showMessage("Reservation confirmed! Continue to Finalization page.");
         }
     });
 });
