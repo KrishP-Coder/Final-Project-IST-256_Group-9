@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Details</title>
+</head>
+<body>
+    <h1>Billing Details</h1>
+
+    <!-- input fields for:
+        User’s full name
+        Address
+        Credit card number, expiration date, and security code
+        Order summary (items in cart, total amount, shipping details)
+    -->
+
+    <form>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="creditCardNumber">Credit Card Number:</label>
+        <input type="text" id="creditCardNumber" name="creditCardNumber" required>
+
+        <label for="expirationDate">Expiration Date:</label>
+        <input type="text" id="expirationDate" name="expirationDate" required>
+
+        <label for="securityCode">Security Code:</label>
+        <input type="text" id="securityCode" name="securityCode" required>
+
+        <label for="orderSummary">Order Summary:</label>
+        <textarea id="orderSummary" name="orderSummary" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

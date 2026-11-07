@@ -23,6 +23,7 @@ function Finalization() {
     const [isError, setIsError] = useState(false);
     const [submitting, setSubmitting] = useState(false);
 
+
     //Calculate total cost
     const total = reservation ? Number(reservation.total) || 0 : 0;
 
