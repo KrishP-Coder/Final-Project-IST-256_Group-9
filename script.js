@@ -22,45 +22,6 @@ let updateIndex = -1;
 
 displayUsers();
 
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const age = document.getElementById("age").value;
-    const email = document.getElementById("email").value;
-    const address = document.getElementById("address").value;
-    const phone = document.getElementById("phone").value;
-
-    if (name == "" || age == "" || email == "" || address == "") {
-        alert("Please fill out all required fields.");
-        return;
-    }
-
-    if (age < 1) {
-        alert("Please enter a valid age.");
-        return;
-    }
-
-    const user = {
-        name: name,
-        age: age,
-        email: email,
-        address: address,
-        phone: phone
-    };
-
-    if (updateIndex == -1) {
-        users.push(user);
-    } else {
-        users[updateIndex] = user;
-        updateIndex = -1;
-    }
-
-    localStorage.setItem("users", JSON.stringify(users));
-    form.reset();
-
-    displayUsers();
-});
 
 // Display users in the table
 function displayUsers() {
@@ -114,20 +75,41 @@ downloadButton.addEventListener("click", function() {
     link.click();
 });
 
-document.getElementById("signupForm").addEventListener("submit", function(e) {
+
+// submit listener
+form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const userData = {
+    const user = {
         name: document.getElementById("name").value,
-        email: document.getElementById("email").value
+        age: document.getElementById("age").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        phone: document.getElementById("phone").value
     };
+
+    if (!user.name || !user.age || !user.email || !user.address) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if (updateIndex === -1) {
+        users.push(user);
+    } else {
+        users[updateIndex] = user;
+        updateIndex = -1;
+    }
+
+    localStorage.setItem("users", JSON.stringify(users));
+    form.reset();
+    displayUsers();
 
     fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(user)
     })
     .then(response => response.json())
     .then(data => {
@@ -137,5 +119,5 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
     .catch(error => {
         console.error("Error:", error);
     });
- 
+
 });
