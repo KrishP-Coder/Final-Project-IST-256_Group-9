@@ -111,5 +111,13 @@ body.finalization h2 {
     padding: 20px 40px;
 }
 
+.billing-page label {
+    font-weight: bold;
+}
+
+.billing-page form {
+    line-height: 1.5;
+}
+
 
 
