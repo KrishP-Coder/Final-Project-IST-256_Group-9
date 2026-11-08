@@ -101,3 +101,15 @@ body.finalization h2 {
     margin-bottom: 15px;
 }
 
+/* CSS for billing page */
+
+.billing-page {
+    background: linear-gradient(to bottom, #17294d, #001b36);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    padding: 20px 40px;
+}
+
+
+
