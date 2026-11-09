@@ -119,5 +119,13 @@ body.finalization h2 {
     line-height: 1.5;
 }
 
+/* CSS for approve page */
 
+body.approval-page {
+    background: linear-gradient(to bottom, #0b132b, #1c2541, #3a506b);
+}
+
+body.approval-page h2 {
+    color: white;
+}
 
