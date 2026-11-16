@@ -17,6 +17,7 @@ create table reservations (
     customer_name varchar(255) not null,
     customer_email varchar(255) not null,
     total decimal(10, 2) not null,
+    quantity int not null default 1,
     foreign key (event_id) references events(event_id)
 );
 

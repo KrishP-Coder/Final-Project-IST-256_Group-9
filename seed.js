@@ -1,3 +1,5 @@
+//this file loads events from events.json into the database
+
 const fs = require('fs');
 const db = require('./db');
 
