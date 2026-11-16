@@ -1,7 +1,7 @@
 create database if not exists clubu_db;
 use clubu_db;
 
-create table event (
+create table events (
     event_id int primary key auto_increment,
     description varchar(200) not null,
     category varchar(100) not null,
@@ -11,22 +11,22 @@ create table event (
     info text
 );
 
-create table reservation (
+create table reservations (
     reservation_id int primary key auto_increment,
     event_id int not null,
     customer_name varchar(255) not null,
     customer_email varchar(255) not null,
     total decimal(10, 2) not null,
-    reservation_date datetime not null,
-    foreign key (event_id) references event(event_id)
+    foreign key (event_id) references events(event_id)
 );
 
-create table finalization (
+create table finalizations (
     finalization_id int primary key auto_increment,
     reservation_id int not null,
     attendance_type varchar(255) not null,
     payment_method varchar(255) not null,
     total decimal(10, 2) not null,
-    finalization_date datetime not null,
-    foreign key (reservation_id) references reservation(reservation_id)
+    finalization_date timestamp default current_timestamp,
+    foreign key (reservation_id) references reservations(reservation_id)
 );
+
