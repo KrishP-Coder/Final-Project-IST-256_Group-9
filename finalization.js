@@ -31,13 +31,6 @@ function Finalization() {
     async function handleSubmit(event) {
         event.preventDefault();
 
-        //Validate reservation
-        if (!reservation) {
-            setMessage("No reservation found.");
-            setIsError(true);
-            return;
-        }
-
         //Validate attendance type
         if (!attendanceType) {
             setMessage("Please select an attendance type.");
@@ -117,13 +110,11 @@ function Finalization() {
 
             <h2>Your Reservations</h2>
             <p><strong>Name:</strong> {reservation.name}</p>
-
             <p><strong>Email:</strong> {reservation.email}</p>
 
             {/* Reservation Table */}
             <div className="table-responsive">
                 <table className="table table-dark table-striped table-bordered">
-
                     <thead>
                         <tr>
                             <th>Event Name</th>
@@ -131,9 +122,7 @@ function Finalization() {
                             <th>Price</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
                         {reservation.items.map((item, index) => (
                             <tr key={item.id || index}>
                                 <td>{item.description}</td>
