@@ -1,7 +1,7 @@
 create database if not exists clubu_db;
 use clubu_db;
 create table if not exists events (
-    event_id varchar(100) primary key auto_increment,
+    event_id varchar(100) primary key,
     description varchar(200) not null,
     category varchar(100) not null,
     unit varchar(20) default 'Seats',
