@@ -1,7 +1,7 @@
 create database if not exists clubu_db;
 use clubu_db;
 create table if not exists events (
-    event_id int primary key auto_increment,
+    event_id varchar(100) primary key auto_increment,
     description varchar(200) not null,
     category varchar(100) not null,
     unit varchar(20) default 'Seats',
@@ -11,7 +11,7 @@ create table if not exists events (
 );
 create table if not exists reservations (
     reservation_id int primary key auto_increment,
-    event_id int not null,
+    event_id varchar(100) not null,
     customer_name varchar(255) not null,
     customer_email varchar(255) not null,
     total decimal(10, 2) not null,
