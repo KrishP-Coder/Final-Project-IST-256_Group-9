@@ -1,6 +1,5 @@
 create database if not exists clubu_db;
 use clubu_db;
-
 create table events (
     event_id int primary key auto_increment,
     description varchar(200) not null,
@@ -10,7 +9,6 @@ create table events (
     price decimal(10, 2) not null,
     info text
 );
-
 create table reservations (
     reservation_id int primary key auto_increment,
     event_id int not null,
@@ -20,7 +18,6 @@ create table reservations (
     quantity int not null default 1,
     foreign key (event_id) references events(event_id)
 );
-
 create table finalizations (
     finalization_id int primary key auto_increment,
     reservation_id int not null,
