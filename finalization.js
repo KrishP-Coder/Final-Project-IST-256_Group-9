@@ -1,113 +1,134 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
 function Finalization() {
 
-    //Retrieve the last reservation from localStorage
-    const [reservation] = useState(() => {
-        const saved = JSON.parse(localStorage.getItem("clubuReservation"));
-        
-        if (saved) {
-            return saved;
-        }
+    // React state for reservations
+    const [reservation, setReservation] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-        const previousReservation = JSON.parse(localStorage.getItem("clubuReservations") || "[]");
-        return previousReservation.length > 0 ? previousReservation[previousReservation.length - 1] : null;
-    });
-
-    //React state for finalization options
+    // React state for finalization options
     const [attendanceType, setAttendanceType] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("");
 
-    //React state for submisison feedback
+    // React state for submission feedback
     const [message, setMessage] = useState("");
     const [isError, setIsError] = useState(false);
     const [submitting, setSubmitting] = useState(false);
 
+    // Load the reservations from the database
+    useEffect(() => {
+        const ids = JSON.parse(localStorage.getItem("clubuReservationIds") || "[]");
 
-    //Calculate total cost
+        if (ids.length === 0) {
+            setLoading(false);
+            return;
+        }
+
+        fetch("http://localhost:3000/api/reservations/ids?ids=" + ids.join(","))
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Could not load reservations.");
+                }
+                return res.json();
+            })
+            .then(rows => {
+                if (rows.length) {
+                    setReservation({
+                        name: rows[0].customer_name,
+                        email: rows[0].customer_email,
+                        total: rows.reduce((sum, r) => sum + Number(r.total), 0),
+                        items: rows.map(r => ({
+                            id: r.reservation_id,
+                            description: r.description,
+                            quantity: r.quantity,
+                            price: Number(r.total) / r.quantity
+                        }))
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                setMessage("Could not load reservations.");
+                setIsError(true);
+            })
+            .finally(() => setLoading(false));
+    }, []);
+
+    // Calculates total cost
     const total = reservation ? Number(reservation.total) || 0 : 0;
 
-    //Handle form submission for finalization
+    // Handles form submission
     async function handleSubmit(event) {
         event.preventDefault();
 
-        //Validate attendance type
-        if (!attendanceType) {
-            setMessage("Please select an attendance type.");
+        if (!attendanceType || !paymentMethod) {
+            setMessage("Please select an attendance type and payment method.");
             setIsError(true);
             return;
         }
 
-        //Validate payment method
-        if (!paymentMethod) {
-            setMessage("Please select a payment method.");
-            setIsError(true);
-            return;
-        }
-
-        //Clear previous messages
         setMessage("");
         setIsError(false);
         setSubmitting(true);
 
-        //Create JSON document containing reservation information
+        // Saves reservation information locally
         const finalizationData = {
             reservation: reservation,
-            customer: {
-                name: reservation.name,
-                email: reservation.email,
-            },
-
-            options: {
-                attendanceType: attendanceType,
-                paymentMethod: paymentMethod,
-            },
-            
+            options: { attendanceType: attendanceType, paymentMethod: paymentMethod },
             total: total,
             finalizationDate: new Date().toISOString()
         };
 
-        //Save finalization data to localStorage
         localStorage.setItem("clubuFinalization", JSON.stringify(finalizationData));
-        
-        try {
-            //AJAX request using fetch
-            const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(finalizationData)
-            });
 
-            if (!response.ok) {
-                throw new Error("API submission failed.");
+        try {
+            // Saves finalization information to the database
+            for (const item of reservation.items) {
+                const response = await fetch("http://localhost:3000/api/finalizations", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        reservation_id: item.id,
+                        attendance_type: attendanceType,
+                        payment_method: paymentMethod,
+                        total: Number((item.price * item.quantity).toFixed(2))
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Finalization submission failed.");
+                }
             }
 
-            const result = await response.json();
             setMessage("Finalization successful.");
             setIsError(false);
         } catch (error) {
-            setMessage("Your information was saved locally, but API submission failed.");
+            console.error(error);
+            setMessage("Submission failed. Please try again.");
             setIsError(true);
         } finally {
             setSubmitting(false);
         }
     }
 
-    //Display message when no reservation is found
-    if (!reservation || !Array.isArray(reservation.items) || reservation.items.length === 0) {
-        return (
-        <div className="alert alert-warning">
-            No reservation found. Please reserve an event first.
-            <p className="mt-2"><a href="shoppingCart.html">Return to Shopping Cart</a></p>
-        </div>);
+    // Displays a message while reservations load
+    if (loading) {
+        return <p>Loading reservations...</p>;
     }
 
-    //React application interface for finalization form
-    return (
-            <div>
+    // Displays a message if no reservation exists
+    if (!reservation || !Array.isArray(reservation.items) || reservation.items.length === 0) {
+        return (
+            <div className="alert alert-warning">
+                No reservation found. Please reserve an event first.
+                <p className="mt-2"><a href="shoppingCart.html">Return to Shopping Cart</a></p>
+            </div>
+        );
+    }
 
+    // Displays the reservation and finalization form
+    return (
+        <div>
             <h2>Your Reservations</h2>
             <p><strong>Name:</strong> {reservation.name}</p>
             <p><strong>Email:</strong> {reservation.email}</p>
@@ -127,14 +148,13 @@ function Finalization() {
                             <tr key={item.id || index}>
                                 <td>{item.description}</td>
                                 <td>{item.quantity}</td>
-                                <td>
-                                    ${(Number(item.price) || 0).toFixed(2)}
-                                </td>
-                            </tr>))}
-
+                                <td>${(Number(item.price) || 0).toFixed(2)}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
+
             <h3>Total: ${total.toFixed(2)}</h3>
 
             {/* Finalization Form */}
@@ -142,72 +162,39 @@ function Finalization() {
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-
-                    <label htmlFor="attendanceType">
-                        Attendance Type:
-                    </label>
-
-                    <select
-                        id="attendanceType" className="form-select" value={attendanceType}
-                        onChange={(event) =>
-                            setAttendanceType(event.target.value)
-                        } required>
-                        <option value="">
-                            Choose attendance type
-                        </option>
-
+                    <label htmlFor="attendanceType">Attendance Type:</label>
+                    <select id="attendanceType" className="form-select" value={attendanceType} onChange={(event) => setAttendanceType(event.target.value)} required>
+                        <option value="">Choose attendance type</option>
                         <option value="Virtual">Virtual</option>
                         <option value="In Person">In Person</option>
-
                     </select>
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="paymentType">
-                        Payment Type:
-                    </label>
-
-                    <select id="paymentType" className="form-select" value={paymentMethod}
-                        onChange={(event) => setPaymentMethod(event.target.value)} required>
-                        <option value="">
-                            Choose payment type
-                        </option>
-
+                    <label htmlFor="paymentType">Payment Type:</label>
+                    <select id="paymentType" className="form-select" value={paymentMethod} onChange={(event) => setPaymentMethod(event.target.value)} required>
+                        <option value="">Choose payment type</option>
                         <option value="Cash">Cash</option>
                         <option value="Card">Card</option>
                     </select>
                 </div>
 
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={submitting}
-                >
-                    {submitting
-                        ? "Submitting..."
-                        : "Confirm Reservation"}
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                    {submitting ? "Submitting..." : "Confirm Reservation"}
                 </button>
             </form>
 
             {/* Submission Feedback */}
             {message && (
-
-                <div
-                    className={
-                        isError
-                            ? "alert alert-danger mt-3"
-                            : "alert alert-success mt-3"
-                    }
-                    role="alert">
+                <div className={isError ? "alert alert-danger mt-3" : "alert alert-success mt-3"} role="alert">
                     {message}
                 </div>
             )}
         </div>
-
     );
 }
 
-//Render React application
+// Renders the React application
 const rootElement = document.getElementById("finalizationRoot");
 
 if (rootElement) {
