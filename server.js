@@ -108,6 +108,29 @@ app.get('/api/reservations', async (req, res) => {
     }
 });
 
+// Gets reservations by ID
+app.get('/api/reservations/ids', async (req, res) => {
+    try {
+        const ids = (req.query.ids || "").split(",").filter(id => id);
+
+        if (ids.length === 0) {
+            return res.json([]);
+        }
+
+        const placeholders = ids.map(() => "?").join(",");
+
+        const [reservations] = await db.query(
+            `SELECT reservations.*, events.description FROM reservations JOIN events ON reservations.event_id = events.event_id WHERE reservation_id IN (${placeholders})`,
+            ids
+        );
+
+        res.json(reservations);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
+    }
+});
+
 // This creates a reservation
 app.post('/api/reservations', async (req, res) => {
     try {
