@@ -6,6 +6,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(express.static(_dirname));
 
 // Test the server
 app.get('/api', (req, res) => {
