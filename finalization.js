@@ -24,7 +24,7 @@ function Finalization() {
             return;
         }
 
-        fetch("http://localhost:3000/api/reservations/ids?ids=" + ids.join(","))
+        fetch("/api/reservations/ids?ids=" + ids.join(","))
             .then(res => {
                 if (!res.ok) {
                     throw new Error("Could not load reservations.");
@@ -84,7 +84,7 @@ function Finalization() {
         try {
             // Saves finalization information to the database
             for (const item of reservation.items) {
-                const response = await fetch("http://localhost:3000/api/finalizations", {
+                const response = await fetch("/api/finalizations", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
