@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.static(_dirname));
+app.use(express.static(__dirname));
 
 // Test the server
 app.get('/api', (req, res) => {
@@ -134,22 +134,38 @@ app.get('/api/reservations/ids', async (req, res) => {
 
 // This creates a reservation
 app.post('/api/reservations', async (req, res) => {
+    const { event_id, customer_name, customer_email, total, quantity } = req.body;
+    if (!event_id || !customer_name || !customer_email || total == null || quantity == null) {
+        return res.sendStatus(400);
+    }
+
+    const conn = await db.getConnection();
+    
     try {
-        const { event_id, customer_name, customer_email, total, quantity } = req.body;
+        await conn.beginTransaction();
 
-        if (!event_id || !customer_name || !customer_email || total == null || quantity == null) {
-            return res.sendStatus(400);
+        const [upd] = await conn.query(
+            'UPDATE events SET seats = seats - ? WHERE event_id = ? AND seats >= ?',
+            [quantity, event_id, quantity]
+        );
+
+        if(!upd.affectedRows) {
+            await conn.rollback();
+            return res.status(400).json({ error: 'Not enough seats available' });
         }
-
-        const [result] = await db.query(
+        const [result] = await conn.query(
             'INSERT INTO reservations (event_id, customer_name, customer_email, total, quantity) VALUES (?, ?, ?, ?, ?)',
             [event_id, customer_name, customer_email, total, quantity]
         );
-
+        await conn.commit();
         res.status(201).json({ reservation_id: result.insertId });
     } catch (error) {
         console.error(error);
+        await conn.rollback();
+        console.error(error);
         res.sendStatus(500);
+    } finally {
+        conn.release();
     }
 });
 
