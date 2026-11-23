@@ -212,9 +212,9 @@ form.addEventListener("submit", function(event) {
         data: JSON.stringify(reservation),
         success: function(response) {
             if (response && response.reservation_ids){
-                localStorage.setItem("clubReservationIds", JSON.stringify(response.reservation_ids));
+                localStorage.setItem("clubuReservationIds", JSON.stringify(response.reservation_ids));
             } else if (response && response.reservation_id) {
-                localStorage.setItem("ClubReservationIds",JSON.stringify([response.reservation_ids]));
+                localStorage.setItem("clubuReservationIds",JSON.stringify([response.reservation_ids]));
             }
             cart = [];
             saveCart();
