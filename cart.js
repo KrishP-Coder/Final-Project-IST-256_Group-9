@@ -203,12 +203,6 @@ form.addEventListener("submit", function(event) {
     localStorage.setItem("clubuReservations", JSON.stringify(reservations));
     localStorage.setItem("clubuReservation", JSON.stringify(reservation));
 
-    cart = [];
-    saveCart();
-    displayCart();
-    form.reset();
-    updateReservationCount();
-    showMessage("Reservation confirmed! Saved in browser; no api.");
 
     // AJAX 
     $.ajax({
@@ -216,8 +210,18 @@ form.addEventListener("submit", function(event) {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(reservation),
-        success: function() {
-            showMessage("Reservation confirmed!");
+        success: function(response) {
+            if (response && response.reservation_ids){
+                localStorage.setItem("clubReservationIds", JSON.stringify(response.reservation_ids));
+            } else if (response && response.reservation_id) {
+                localStorage.setItem("ClubReservationIds",JSON.stringify([response.reservation_ids]));
+            }
+            cart = [];
+            saveCart();
+            displayCart();
+            form.reset();
+            updateReservationCount();
+            showMessage("Reservation confirmed! Saved in browser; no api.");
         },
         error: function() {
             // Saved locally
