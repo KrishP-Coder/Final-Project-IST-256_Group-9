@@ -1,0 +1,23 @@
+{
+  "name": "final-project-ist-256_group-9",
+  "version": "1.0.0",
+  "description": "Student club website for the Web Dev Club.",
+  "main": "cart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrishP-Coder/Final-Project-IST-256_Group-9.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KrishP-Coder/Final-Project-IST-256_Group-9/issues"
+  },
+  "homepage": "https://github.com/KrishP-Coder/Final-Project-IST-256_Group-9#readme",
+  "dependencies": {
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  }
+}
